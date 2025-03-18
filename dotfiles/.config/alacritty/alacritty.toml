@@ -1,0 +1,15 @@
+
+[window]
+
+
+decorations = "full"
+decorations_theme_variant = "dark"
+
+
+[font]
+
+normal.family = "Hack Nerd Font"
+size = 14
+
+[general]
+import = ["./themes/tokyo-night-storm.toml"]
