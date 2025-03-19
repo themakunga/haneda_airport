@@ -2,10 +2,10 @@
   environment.systemPackages = with pkgs; [
     alacritty
     neofetch
+    nchat
     tmux
     mkalias
     obsidian
-    wezterm
     neovim
     oh-my-posh
     go
