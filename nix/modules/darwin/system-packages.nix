@@ -16,6 +16,7 @@
     vim
     lazygit
     ripgrep
+    matterhorn
   ];
 
   fonts = {
