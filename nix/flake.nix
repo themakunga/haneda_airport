@@ -26,10 +26,11 @@
     darwinConfigurations.kanagawa = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
-        ./modules/stow
         mac-app-util.darwinModules.default
         ./modules/darwin
         ./modules/homebrew
+        ./modules/home-manager
+        ./modules/stow
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
@@ -41,7 +42,6 @@
         # nvf.nixosModules.default
         # ./modules/nvf
         home-manager.darwinModules.home-manager
-        ./modules/home-manager
       ];
     };
   };
