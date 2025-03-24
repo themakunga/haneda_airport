@@ -8,6 +8,7 @@
     ./system-settings.nix
     ./user-configuration.nix
     # ../../packages/shared/ssh.nix
+    ./colima-docker.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
