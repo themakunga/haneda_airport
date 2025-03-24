@@ -1,23 +1,18 @@
-{config, lib, pkgs, ...}:
+{inputs, config, lib, pkgs, ...}:
+
 {
-  virtualization.docker = {
-    enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-
-  };
-
-  enviroment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
+    docker
     colima
     docker-client
     docker-compose
   ];
 
-  user.user."${config.users.primaryUser.username}" = {
-    extraGroups = ["docker"];
-  };
+
+
+
+
+
 
   launchd.daemons.docker-socket = lib.mkIf pkgs.stdenv.isDarwin {
     serviceConfig = {
