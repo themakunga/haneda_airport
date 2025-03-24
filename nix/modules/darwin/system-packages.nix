@@ -17,6 +17,8 @@
     lazygit
     ripgrep
     matterhorn
+    pre-commit
+    zulu23
   ];
 
   fonts = {
