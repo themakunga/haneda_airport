@@ -16,6 +16,7 @@ M.plugin = {
     "folke/todo-comments.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
     "nvim-telescope/telescope-media-files.nvim",
+    "jemag/telescope-diff.nvim",
   },
   event = "VeryLazy",
   config = function()
@@ -41,6 +42,7 @@ M.setup = function()
 
   telescope.load_extension("ui-select")
   telescope.load_extension("media_files")
+  telescope.load_extension("diff")
 
   local custom_actions = transform_mod({
     open_trouble_qflist = function(prompt_bufnr)
@@ -178,6 +180,12 @@ M.setup = function()
   keymap("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", "[f]ind [r]ecent files")
   keymap("n", "<leader>fs", "<cmd>Telescope live_grep<CR>", "[f]ind [s]tring in cwd")
   keymap("n", "<leader>fc", "<cmd>Telescope grep_string<CR>", "[f]ind string under [c]ursor in cwd")
+  keymap("n", "<leader>fdC", function()
+    require("telescope").extensions.diff.diff_files({ hidden = true })
+  end, "[C]ompare 2 files")
+  keymap("n", "<leader>fdc", function()
+    require("telescope").extensions.diff.diff_current({ hidden = true })
+  end, "Compare file with [c]urrent")
 end
 
 if not pcall(debug.getlocal, 4, 1) then
