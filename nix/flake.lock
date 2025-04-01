@@ -32,21 +32,6 @@
         "type": "github"
       }
     },
-    "darwin-docker": {
-      "locked": {
-        "lastModified": 1723203965,
-        "narHash": "sha256-S51uaVcTlCxK2RsEgPvF7/SCaGJqhS3KvSjmxp/izz4=",
-        "owner": "konradmalik",
-        "repo": "darwin-docker",
-        "rev": "1037a88d19a7b19e2418770fa94fdedff219b4e3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "konradmalik",
-        "repo": "darwin-docker",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -248,7 +233,6 @@
     },
     "root": {
       "inputs": {
-        "darwin-docker": "darwin-docker",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
         "nix-darwin": "nix-darwin",

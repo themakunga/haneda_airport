@@ -19,6 +19,12 @@
     matterhorn
     pre-commit
     zulu23
+    dbeaver-bin
+    nmap
+    libpq
+    postgresql
+    irssi
+    lazysql
   ];
 
   fonts = {
