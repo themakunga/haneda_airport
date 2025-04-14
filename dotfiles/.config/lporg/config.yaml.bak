@@ -1,0 +1,104 @@
+apps:
+  pages:
+    - number: 1
+      items:
+        - App Store
+        - Safari
+        - Mail
+        - Contacts
+        - Calendar
+        - Reminders
+        - Notes
+        - FaceTime
+        - Messages
+        - Maps
+        - Find My
+        - Photo Booth
+        - Photos
+        - Music
+        - Podcasts
+        - TV
+        - Voice Memos
+        - Weather
+        - Stocks
+        - Books
+        - Clock
+        - Calculator
+        - Freeform
+        - Home
+        - Siri
+        - iPhone Mirroring
+        - Passwords
+        - System Settings
+        - folder: Other
+          pages:
+            - number: 1
+              items:
+                - Shortcuts
+                - QuickTime Player
+                - Dictionary
+                - TextEdit
+                - Font Book
+                - Screen Sharing
+                - Mission Control
+                - Time Machine
+                - Preview
+                - Screenshot
+                - Image Capture
+                - Digital Color Meter
+                - ColorSync Utility
+                - Stickies
+                - Grapher
+                - VoiceOver Utility
+                - Print Center
+                - Automator
+                - Script Editor
+                - Audio MIDI Setup
+                - Bluetooth File Exchange
+                - Disk Utility
+                - System Information
+                - Activity Monitor
+                - Console
+                - Terminal
+                - AirPort Utility
+                - Migration Assistant
+                - Tips
+                - Chess
+        - Image Playground
+        - Firefox Developer Edition
+        - WezTerm
+        - Obsidian
+        - Figma
+        - Firefox
+    - number: 2
+      items:
+        - Chromium
+        - Alacritty
+        - Google Chrome
+        - Magnet
+        - Mattermost
+        - Amphetamine
+        - Be Focused Pro
+        - Parcel
+        - Xcode
+        - dbeaver
+widgets:
+  pages: []
+dock_items:
+  apps:
+    - /System/Applications/Launchpad.app
+    - /System/Applications/Mail.app
+    - /System/Applications/Calendar.app
+  others:
+    - path: ~/Downloads
+      view: 1
+      sort: 2
+  settings:
+    autohide: true
+    largesize: null
+    magnification: false
+    minimize-to-application: true
+    mru-spaces: false
+    show-recents: false
+    tilesize: null
+desktop: {}
