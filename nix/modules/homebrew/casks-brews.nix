@@ -5,6 +5,7 @@
       "tfenv"
       "pnpm"
       "mas"
+      "blacktop/tap/lporg"
     ];
     casks = [
       "figma"
@@ -13,6 +14,8 @@
       "chromium"
       "google-chrome"
       "mattermost"
+      "zoom"
+      "typora"
     ];
     masApps = {
       "Magnet" = 441258766;
