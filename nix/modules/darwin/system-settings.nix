@@ -1,4 +1,15 @@
 {pkgs, ...}: {
+  security = {
+    pam = {
+      services= {
+        sudo_local= {
+        touchIdAuth = true;
+      };
+      };
+    };
+
+
+  };
   system = {
     defaults = {
       dock.autohide = true;
@@ -19,7 +30,7 @@
       };
     };
 
-    keyboard = {
+        keyboard = {
       enableKeyMapping = true;
       remapCapsLockToControl = true;
     };
