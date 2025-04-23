@@ -6,6 +6,7 @@
       "pnpm"
       "mas"
       "blacktop/tap/lporg"
+      "pandoc"
     ];
     casks = [
       "figma"

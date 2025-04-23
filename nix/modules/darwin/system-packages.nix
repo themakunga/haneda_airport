@@ -25,6 +25,7 @@
     postgresql
     irssi
     lazysql
+    prismlauncher
   ];
 
   fonts = {
