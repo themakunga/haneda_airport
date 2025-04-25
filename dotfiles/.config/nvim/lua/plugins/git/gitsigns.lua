@@ -71,7 +71,7 @@ M.setup = function()
     end,
   }
 
-  gitsigns.setup({})
+  gitsigns.setup(opts)
 end
 
 if not pcall(debug.getlocal, 4, 1) then
