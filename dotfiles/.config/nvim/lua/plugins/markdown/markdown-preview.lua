@@ -13,7 +13,7 @@ M.plugin = {
 }
 
 M.setup = function()
-  local ok = require("utils.check-requires").check({ "markdown-preview", "which-key" })
+  local ok = require("utils.check-requires").check({ "markdown-preview" })
   if not ok then
     return
   end

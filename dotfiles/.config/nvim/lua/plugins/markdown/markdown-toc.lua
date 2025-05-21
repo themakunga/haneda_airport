@@ -7,13 +7,13 @@ M.plugin = {
   opts = {
     -- Your configuration here (optional)
   },
-  setup = function()
+  config = function()
     M.setup()
   end,
 }
 
 M.setup = function()
-  local ok = require("utils.check-requires").check({ "mtoc", "which-key" })
+  local ok = require("utils.check-requires").check({ "mtoc" })
   if not ok then
     return
   end
@@ -22,9 +22,21 @@ M.setup = function()
 
   local keymap = require("utils.keymapping").global
 
-  mtoc.setup({ headings = {
-    pattern = "^(##+)%s+(.+)$",
-  } })
+  mtoc.setup({
+    headings = {
+      before_toc = false,
+      indent_size = 2,
+      pattern = "^(##+)%s+(.+)$",
+    },
+    auto_update = {
+      enabled = true,
+      -- This allows the ToC to be refreshed silently on save for any markdown file.
+      -- The refresh operation uses `Mtoc update` and does NOT create the ToC if
+      -- it does not exist.
+      events = { "BufWritePre" },
+      pattern = "*.{md,mdown,mkd,mkdn,markdown,mdwn}",
+    },
+  })
 
   keymap("n", "<leader>mti", "<cmd>Mtoc insert<cr>", "Markdown TOC insert on cursor position")
   keymap("n", "<leader>mtu", "<cmd>Mtoc update<cr>", "Markdown TOC update")

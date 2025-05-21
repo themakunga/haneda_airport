@@ -98,3 +98,6 @@ esac
 #
 clear
 neofetch
+
+# Created by `pipx` on 2025-05-10 19:57:35
+export PATH="$PATH:/Users/nicolas/.local/bin"

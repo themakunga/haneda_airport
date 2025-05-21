@@ -3,34 +3,20 @@ local M = {}
 M.plugin = {
   "whitestarrain/md-section-number.nvim",
   ft = "markdown",
-  setup = function()
+  config = function()
     M.setup()
   end,
 }
 
 M.setup = function()
-  local ok = require("utils.check-requires").check({ "md-section-number" })
+  local ok = require("utils.check-requires").check({ "md_section_number" })
   if not ok then
     return
   end
 
-  local mdsectionnumber = require("md-section-number")
+  local mdsectionnumber = require("md_section_number")
 
-  mdsectionnumber.setup({
-    max_level = 5, -- stop to add section number after max_level
-    min_level = 2, -- start to add section number after min_level
-    ignore_pairs = { -- the markdown content in these pairs will be ignored
-      { "```", "```" },
-      { "\\~\\~\\~", "\\~\\~\\~" },
-      { "<!--", "-->" },
-    },
-    toc = { -- toc sidebar config
-      width = 30,
-      position = "right",
-      indent_space_number = 2,
-      header_prefix = "- ",
-    },
-  })
+  mdsectionnumber.setup()
 
   local keymap = require("utils.keymapping").global
 

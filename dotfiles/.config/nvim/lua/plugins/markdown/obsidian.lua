@@ -10,6 +10,9 @@ M.plugin = {
 
     -- see below for full list of optional dependencies 👇
   },
+  config = function()
+    M.setup()
+  end,
 }
 
 M.setup = function()

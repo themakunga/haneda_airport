@@ -4,6 +4,7 @@ M.init = function()
   return {
     require("plugins.git.gitsigns").plugin,
     require("plugins.git.lazygit").plugin,
+    require("plugins.git.gist").plugin,
     require("plugins.format.conform").plugin,
     require("plugins.format.cmp").plugin,
     require("plugins.format.mason").plugin,

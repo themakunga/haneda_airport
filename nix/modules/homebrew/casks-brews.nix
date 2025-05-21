@@ -17,6 +17,8 @@
       "mattermost"
       "zoom"
       "typora"
+      "openvpn-connect"
+      "discord"
     ];
     masApps = {
       "Magnet" = 441258766;
