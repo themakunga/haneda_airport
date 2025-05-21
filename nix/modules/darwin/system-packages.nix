@@ -10,6 +10,7 @@
     oh-my-posh
     go
     nodejs_23
+    pnpm
     groovy
     ruby
     bash
@@ -26,6 +27,12 @@
     irssi
     lazysql
     prismlauncher
+    openvpn
+    gh
+    google-cloud-sdk
+    awscli2
+    pipx
+    cyberduck
   ];
 
   fonts = {
