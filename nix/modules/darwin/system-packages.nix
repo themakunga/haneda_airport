@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    nixd
     alacritty
     neofetch
     nchat
@@ -33,6 +34,11 @@
     awscli2
     pipx
     cyberduck
+    sops
+    age
+    ssh-to-age
+    yt-dlp
+    zed-editor
   ];
 
   fonts = {

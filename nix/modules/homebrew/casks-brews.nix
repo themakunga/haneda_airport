@@ -27,6 +27,7 @@
       "BeFocusedPro" = 961632517;
       "Eero" = 1023499075;
       "Xcode" = 497799835;
+      "SweetDreams" = 1644428422;
     };
     onActivation = {
       cleanup = "zap";
