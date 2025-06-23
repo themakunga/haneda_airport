@@ -24,10 +24,10 @@ M.setup = function()
 
   local opts = {
     options = {
-    -- stylua: ignore
-    close_command = function(n) Snacks.bufdelete(n) end,
-    -- stylua: ignore
-    right_mouse_command = function(n) Snacks.bufdelete(n) end,
+      -- stylua: ignore
+      close_command = function(n) Snacks.bufdelete(n) end,
+      -- stylua: ignore
+      right_mouse_command = function(n) Snacks.bufdelete(n) end,
       umbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
       middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
       -- NOTE: this plugin is designed with this icon in mind,
@@ -160,7 +160,7 @@ M.setup = function()
   vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
     callback = function()
       vim.schedule(function()
-        pcall(nvim_bufferline)
+        pcall(bufferline)
       end)
     end,
   })
