@@ -39,6 +39,7 @@
     ssh-to-age
     yt-dlp
     zed-editor
+    halloy
   ];
 
   fonts = {
