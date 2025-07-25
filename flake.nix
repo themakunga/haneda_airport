@@ -1,48 +1,125 @@
 {
-  description = "Example nix-darwin system flake";
-
+  description = "Multi Host Nix and Nix-darwin config";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    mac-app-util.url = "github:hraban/mac-app-util";
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    # nvf.url = "github:notashelf/nvf";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-  };
-
-  outputs = {
-    self,
-    nix-darwin,
-    nixpkgs,
-    mac-app-util,
-    nix-homebrew,
-    # nvf,
-    home-manager,
-  }: {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations.kanagawa = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        mac-app-util.darwinModules.default
-        ./modules/darwin
-        ./modules/homebrew
-        ./modules/home-manager
-        ./modules/stow
-        nix-homebrew.darwinModules.nix-homebrew
-        {
-          nix-homebrew = {
-            enable = true;
-            user = "nicolas";
-            autoMigrate = true;
-          };
-        }
-        # nvf.nixosModules.default
-        # ./modules/nvf
-        home-manager.darwinModules.home-manager
-      ];
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+    };
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
     };
   };
+
+  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, ...}@inputs:
+
+  let
+    supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
+
+    forAllSystems  = nixpkgs.lib.genAttrs supportedSystems;
+
+    common = import ./hosts/common.nix;
+    userDefault = {
+      enable = true;
+      name = "nicolas";
+      description = "Nicolas Martinez";
+
+    };
+    overlays = [
+      (final: prev: {
+        myDevShell = self.packages.${prev.system}.dev-shell;
+      })
+    ];
+
+    mkNixosSystem = {system, host, user, extraModules ? []}:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          (./hosts/linux + "/${host}.nix")
+          sops-nix.nixosModules.sops
+          {nixpkgs.overlays = overlays;}
+          common
+        ] ++ extraModules;
+        specialArgs = {inherit inputs;};
+      };
+
+    mkDarwinSystem = {system, host, user, extraModules ? []}:
+      darwin.lib.darwinSystem {
+        inherit system;
+        modules = [
+          (./hosts/darwin + "/${host}.nix")
+          sops-nix.darwinModules.sops
+          mac-app-util.darwinModules.default
+          nix-homebrew.darwinModules.nix-homebrew
+          {nixpkgs.overlays = overlays;}
+          common
+        ] ++ extraModules;
+        specialArgs = { inherit inputs;};
+      };
+  in
+  {
+    nixosConfigurations = {
+      mediacenter = mkNixosSystem {
+        system = "x86_64-linux";
+        host = "mediacenter";
+      };
+      homelab = mkNixosSystem {
+        system = "x86_64-linux";
+        host = "homelab";
+      };
+      steamMachile = mkNixosSystem {
+        system = "x86_64-linux";
+        host = "steamMachine";
+      };
+      rpi = mkNixosSystem {
+        system = "aarch64-linux";
+        host = "rpi";
+        user = userDefault;
+      };
+      rpizero = mkNixosSystem {
+        system = "aarch64-linux";
+        host = "rpizero";
+      };
+    };
+
+    darwinConfigurations = {
+      kanagawa = mkDarwinSystem {
+        system = "aarch64-darwin";
+        host = "kanagawa";
+        user = userDefault;
+      };
+      outer-heaven = mkDarwinSystem {
+        system = "aarch64-darwin";
+        host = "outer-heaven";
+        user = {
+          name = "nicolas";
+          description = "Nicolas Villarroel";
+          enable = true;
+        };
+      };
+    };
+
+    packages = forAllSystems (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = overlays;
+        };
+      in {
+        dev-shell = pkgs.callPackage ./modules/dev-shell.nix {};
+      });
+    devShells = forAllSystems (system: {
+      default = self.packages.${system}.dev-shell;
+    });
+  };
+
+
+
 }
