@@ -35,6 +35,7 @@
         git
         gh
         delta
+        lazygit
         neovim
         stow
         sops
@@ -64,8 +65,57 @@
 
         # configuracion adicional
         git config --global diff.colorMoved "default"
-            git config --global init.defaultBranch "main"
-            git config --global pull.rebase true
-            git config --global push.default "simple"
-      '';
-    }
+        git config --global init.defaultBranch "main"
+        git config --global pull.rebase true
+        git config --global push.default "simple"
+
+        # configuracion base de github
+        gh config set git_protocol ssh
+
+        # archivos ignorados globalmente
+        git config --global core.excludesfile ${pkgs.writeText "gitignore" ''
+          .DS_Store
+          _build/
+          shell.nix
+          .direnv/
+          .envrc
+          *.swp
+        ''}
+
+        # configuracion por workspace
+        ## thoughtworks
+        git config --global includeIf."gitdir:~/Projects/Thoughtworks/".path ${pkgs.writeText "gitconfig-thoughtworks" ''
+        [user]
+          name = Nicolas Villarroel
+          email = nicolas.villarroel@thoughtworks.com
+        ''}
+
+        ## 42devs
+        git config --global includeIf."gitdir:~/Projects/42devs/".path ${pkgs.writeText "gitconfig-42devs" ''
+        [user]
+          name = Nicolas Martinez V.
+          email = nicolas@42devs.cl
+        ''}
+
+        ## bbook
+        git config --global includeIf."gitdir:~/Projects/42devs/Clients/Bbook/".path ${pkgs.writeText "gitconfig-bbook" ''
+        [user]
+          name = Nicolas Martinez V.
+          email = nmartinez@bbook.cl
+      ''}
+
+      # enable delta
+      if command -v delta &> /dev/null; then
+        git config --global core.pager "delta"
+        git config --global interactive.diffFilter "delta --color-only"
+        git config --global delta.navigate true
+        git config --global delta.light false
+      fi
+
+      echo "Installed GIT Tools"
+      echo "GIT: $(git --version)"
+      echo "GH Cli: $(gh --version)"
+      echo "LazyGit: $(lazygit --version)"
+
+    '';
+  }

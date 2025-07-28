@@ -14,12 +14,8 @@ in {
 
 
   config = mkIf cfg.enable {
-    system = {
-      defaults = {
-        ComputerName = cfg.name;
-        LocalHostName = cfg.name;
-        hostname = cfg.name;
-      };
+    networking = {
+      hostName = cfg.name;
     };
   };
 }

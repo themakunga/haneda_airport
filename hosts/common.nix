@@ -19,7 +19,6 @@
   };
 
   imports = [
-    ./shared/git.nix
     ./shared/user.nix
     ./shared/hostname.nix
   ];

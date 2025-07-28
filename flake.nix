@@ -38,7 +38,7 @@
       })
     ];
 
-    mkNixosSystem = {system, host, user, extraModules ? []}:
+    mkNixosSystem = {system, host, user, hostname, extraModules ? []}:
       nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
@@ -50,7 +50,7 @@
         specialArgs = {inherit inputs;};
       };
 
-    mkDarwinSystem = {system, host, user, extraModules ? []}:
+    mkDarwinSystem = {system, host, user, hostname, extraModules ? []}:
       darwin.lib.darwinSystem {
         inherit system;
         modules = [
@@ -98,6 +98,10 @@
       outer-heaven = mkDarwinSystem {
         system = "aarch64-darwin";
         host = "outer-heaven";
+        hostname = {
+            enable = true;
+            name = "outer-heaven";
+        };
         user = {
           name = "nicolas";
           description = "Nicolas Villarroel";
