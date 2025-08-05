@@ -55,13 +55,21 @@
         inherit system;
         modules = [
           (./hosts/darwin + "/${host}.nix")
-          sops-nix.darwinModules.sops
-          mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+                enable = true;
+                autoMigrate = true;
+                user = user.name;
+            };
+          }
+          sops-nix.darwinModules.sops
+          ./modules/homebrew.nix
+          mac-app-util.darwinModules.default
           {nixpkgs.overlays = overlays;}
           common
         ] ++ extraModules;
-        specialArgs = { inherit inputs;};
+          specialArgs = { inherit inputs;};
       };
   in
   {
