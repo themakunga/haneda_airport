@@ -2,7 +2,7 @@
   environment.systemPackages = with pkgs; [
     neovim
     go
-    nodejs_23
+    nodejs_24
     pnpm
     groovy
     ruby
@@ -19,6 +19,7 @@
     awscli2
     pipx
     cyberduck
-    zed-editor
+   zed-editor
+  wezterm
   ];
 }

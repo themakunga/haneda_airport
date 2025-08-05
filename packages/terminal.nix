@@ -9,5 +9,7 @@
     sops
     age
     ssh-to-age
+    fzf
+    stow
   ];
 }
