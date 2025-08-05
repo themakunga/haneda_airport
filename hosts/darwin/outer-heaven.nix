@@ -10,6 +10,7 @@
   ];
 
   system = {
+    primaryUser = "nicolas";
     stateVersion = 6;
     defaults = {
       dock = {
@@ -24,9 +25,8 @@
           "${pkgs.google-chrome}/Applications/Nix Apps/Google Chrome.app/"
           "${pkgs.obsidian}/Applications/Nix Apps/Obsidian.app/"
           "/System/Applications/Notes.app/"
-          "${pkgs.alacritty}/Applications/Nix Apps/Alacritty.app/"
-          "${pkgs.zed}/Applications/Nix Apps/Zed.app/"
-
+          "${pkgs.wezterm}/Applications/Nix Apps/WezTerm.app/"
+          "${pkgs.zed-editor}/Applications/Nix Apps/Zed.app/"
         ];
       };
       finder = {
@@ -35,6 +35,7 @@
         _FXShowPosixPathInTitle = true;
       };
       NSGlobalDomain = {
+        WebKitDeveloperExtras = true;
         AppleShowAllExtensions = true;
         InitialKeyRepeat = 14;
         KeyRepeat = 1;
@@ -54,9 +55,6 @@
   };
   nix = {
     enable = true;
-    settings = {
-      experimental-features = "nix-command flakes";
-    };
   };
 
   security = {
@@ -75,10 +73,4 @@
     };
   };
 
-  environment = {
-    systemPackages = with pkgs; [
-      _1password-gui
-      _1password-cli
-    ];
-  };
 }
