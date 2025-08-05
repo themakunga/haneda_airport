@@ -1,0 +1,12 @@
+keys:
+  - users:
+    - &main age15wq7z5pxz9xnp6py04x9afpjep7qz0pmwfzf4scc8nvkk5w6vauq32j8pe
+  - hosts:
+    - &outerheaven age1kj0s42g6gjka5qcxpxn3cxqyxuxpevqfvxrqkfm32ytud88uvplq6reyr2
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+    - age:
+        - *main
+        - *outerheaven
+
