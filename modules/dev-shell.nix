@@ -9,7 +9,7 @@
           repo = "area51";
           rev = "main";
           sha256 = "0000000000000000000000000000000000000000000000000000";
-          token = secrets.github.access_token;
+          # access-token = secrets.github.access_token;
         }
       else {
         owner = "themkunga";
@@ -18,7 +18,7 @@
         sha256 = "0000000000000000000000000000000000000000000000000000";
       };
 
-    privateRepo = pkgs.fetchFromGithub (privateRepoConfig // {
+    privateRepo = pkgs.fetchFromGitHub (privateRepoConfig // {
       netrcPhase = if privateRepoConfig ? token then ''
         cat > netrc <<EOF
         machine github.com
@@ -38,6 +38,7 @@
         lazygit
         neovim
         stow
+        fzf
         sops
         gnupg
         age
