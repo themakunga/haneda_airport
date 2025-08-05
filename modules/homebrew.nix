@@ -1,7 +1,9 @@
-{...}: {
+{homebrew, ...}: {
   homebrew = {
     enable = true;
     onActivation = {
+      autoUpdate = true;
+      upgrade = true;
       cleanup = "zap";
     };
 
@@ -12,15 +14,18 @@
     ];
     casks = [
       "figma"
+      "typora"
+      "mattermost"
+      "zoom"
+      "1password"
+      "1password-cli"
     ];
     masApps = {
       "Magnet" = 441258766;
       "Parcel" = 639968404;
       "Amphetamine" = 937984704;
       "BeFocusedPro" = 961632517;
-      "Eero" = 1023499075;
       "Xcode" = 497799835;
-      "SweetDreams" = 1644428422;
     };
   };
 }
