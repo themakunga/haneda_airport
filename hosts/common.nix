@@ -11,6 +11,9 @@
       curl
       htop
       ctop
+      fzf
+      bat
+
     ];
     variables = {
       EDITOR = "nvim";

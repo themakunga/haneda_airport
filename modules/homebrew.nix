@@ -19,6 +19,7 @@
       "zoom"
       "1password"
       "1password-cli"
+      "teamviewer"
     ];
     masApps = {
       "Magnet" = 441258766;

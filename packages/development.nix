@@ -21,5 +21,7 @@
     cyberduck
    zed-editor
   wezterm
+    rustc
+    cargo
   ];
 }
