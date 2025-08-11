@@ -47,7 +47,6 @@ in {
             "${pkgs.obsidian}/Applications/Nix Apps/Obsidian.app/"
             "/Applications/Safari.app/"
             "${pkgs.firefox}/Applications/Nix Apps/Firefox.app/"
-            "${pkgs.google-chrome}/Applications/Nix Apps/Google Chrome.app/"
             "${pkgs.wezterm}/Applications/Nix Apps/WezTerm.app/"
           ];
         };
@@ -61,22 +60,13 @@ in {
           InitialKeyRepeat = 14;
           KeyRepeat = 1;
         };
-        CustomUserPreferences = {
-          NSGlobalDomain = {
-            WebKitDeveloperExtras = true;
-          };
-          "com.apple.finder" = {
-            ShowExternalHardDrivesOnDesktop = true;
-            ShowHardDrivesOnDesktop = true;
-            ShowMountedServersOnDesktop = true;
-            ShowRemovableMediaOnDesktop = true;
-            _FXSortFoldersFirst = true;
-            FXDefaultSearchScope = "SCcf";
-          };
-          "com.apple.desktopservices" = {
-            DSDontWriteNetworkStores = true;
-            DSDontWriteUSBStores = true;
-          };
+        screencapture = {
+          disable-shadow = true;
+          include-date = true;
+          show-thumbnail = true;
+          location = "/Users/${cfg.name}/Media/Screen Capture/";
+          target = "preview";
+
         };
       };
       keyboard = {
