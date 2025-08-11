@@ -9,56 +9,6 @@
     ../../packages/social.nix
     ../../packages/terminal.nix
     ../../modules/homebrew.nix
+    ./common/base.nix
   ];
-
-  system = {
-    stateVersion = 6;
-    defaults = {
-      dock = {
-        autohide = true;
-        persistent-apps = [
-          "/System/Applications/Launchpad.app"
-          "/System/Applications/Mail.app"
-          "/System/Applications/Calendar.app"
-        ];
-      };
-      finder = {
-        FXPreferredViewStyle = "clmv";
-        AppleShowAllExtensions = true;
-        _FXShowPosixPathInTitle = true;
-      };
-      NSGlobalDomain = {
-        AppleShowAllExtensions = true;
-        InitialKeyRepeat = 14;
-        KeyRepeat = 1;
-      };
-    };
-    keyboard = {
-      enableKeyMapping = true;
-      remapCapsLockToControl = true;
-    };
-  };
-
-  nixpkgs = {
-    hostPlatform = "aarch64-darwin";
-    config = {
-      allowUnfree = true;
-    };
-  };
-  nix = {
-    enable = true;
-    settings = {
-      experimental-features = "nix-command flakes";
-    };
-  };
-
-  security = {
-    pam = {
-      services = {
-        sudo_local = {
-          touchIdAuth = true;
-        };
-      };
-    };
-  };
 }
