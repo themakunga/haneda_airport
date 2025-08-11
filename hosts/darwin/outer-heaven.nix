@@ -15,6 +15,8 @@
       dock = {
         persistent-apps = [
           "${pkgs.zed-editor}/Applications/Nix Apps/Zed.app/"
+            "${pkgs.google-chrome}/Applications/Nix Apps/Google Chrome.app/"
+          "/Applications/zoom.us.app/"
         ];
       };
     };
