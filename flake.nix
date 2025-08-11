@@ -102,6 +102,10 @@
         system = "aarch64-darwin";
         host = "kanagawa";
         user = userDefault;
+        hostname = {
+            enable = true;
+            name = "kanagawa";
+          };
       };
       outer-heaven = mkDarwinSystem {
         system = "aarch64-darwin";
