@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{inputs, pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     neovim
     go
+    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
     nodejs_24
     pnpm
     groovy
@@ -19,9 +20,10 @@
     awscli2
     pipx
     cyberduck
-   zed-editor
-  wezterm
+    zed-editor
+    wezterm
     rustc
     cargo
+    opentofu
   ];
 }

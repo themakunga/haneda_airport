@@ -6,7 +6,13 @@ let
   cfg = config.user;
 in {
 
-
+    lib = {
+      generators = {
+        toPlist = {
+          escape = true;
+        };
+      };
+    };
 
     nixpkgs = {
       hostPlatform = "aarch64-darwin";

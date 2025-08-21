@@ -20,6 +20,8 @@
       "1password"
       "1password-cli"
       "teamviewer"
+      "firefox"
+      "logitech-g-hub"
     ];
     masApps = {
       "Magnet" = 441258766;

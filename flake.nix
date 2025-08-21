@@ -16,6 +16,7 @@
     mac-app-util = {
       url = "github:hraban/mac-app-util";
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, ...}@inputs:
