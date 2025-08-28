@@ -43,7 +43,11 @@
         gnupg
         age
         ssh-to-age
+        self.packages.${system}.feedr
       ] ++ (if sops != null then [ sops ] else []);
+
+      OPENSSL_NO_VENDOR = "1";
+  RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
 
       shellHook = ''
         echo "Setting up development environment..."

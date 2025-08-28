@@ -11,6 +11,7 @@
       "nvm"
       "tfenv"
       "mas"
+      "python-tk"
     ];
     casks = [
       "figma"

@@ -19,11 +19,14 @@
     google-cloud-sdk
     awscli2
     pipx
+    nil
+    nixfmt-rfc-style
     cyberduck
     zed-editor
     wezterm
     rustc
     cargo
+    feedr
     opentofu
   ];
 }
