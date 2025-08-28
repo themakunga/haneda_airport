@@ -5,5 +5,6 @@
     slack
     discord
     irssi
+    reddit-tui
   ];
 }
