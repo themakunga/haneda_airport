@@ -44,10 +44,11 @@
         age
         ssh-to-age
         self.packages.${system}.feedr
+        self.packages.${system}.instagram-cli
       ] ++ (if sops != null then [ sops ] else []);
 
       OPENSSL_NO_VENDOR = "1";
-  RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+      RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
 
       shellHook = ''
         echo "Setting up development environment..."
