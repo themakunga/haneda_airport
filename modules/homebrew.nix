@@ -1,4 +1,4 @@
-{homebrew, ...}: {
+{...}: {
   homebrew = {
     enable = true;
     onActivation = {
