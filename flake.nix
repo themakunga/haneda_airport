@@ -65,7 +65,7 @@
             };
           }
           sops-nix.darwinModules.sops
-          ./modules/homebrew.nix
+          (./modules/homebrew + "/${host}.nix")
           mac-app-util.darwinModules.default
           {nixpkgs.overlays = overlays;}
           common
