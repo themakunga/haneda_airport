@@ -46,14 +46,26 @@ in {
           minimize-to-application = true;
           show-recents = false;
           persistent-apps = [
-            "/System/Applications/Launchpad.app/"
-            "/System/Applications/Mail.app/"
-            "/System/Applications/Calendar.app/"
-            "/System/Applications/Notes.app/"
-            "${pkgs.obsidian}/Applications/Nix Apps/Obsidian.app/"
-            "/Applications/Safari.app/"
-            "${pkgs.firefox}/Applications/Nix Apps/Firefox.app/"
-            "${pkgs.wezterm}/Applications/Nix Apps/WezTerm.app/"
+            {
+              app = "/System/Applications/Launchpad.app";
+            }
+            {
+              app = "/System/Applications/Mail.app";
+            }
+            {
+              app = "/System/Applications/Calendar.app";
+            }
+            {
+              app = "/Applications/Safari.app";
+            }
+            {
+              app = "/System/Applications/Notes.app";
+            }
+            {
+              spacer = {
+                small = true;
+              };
+            }
           ];
         };
         finder = {
