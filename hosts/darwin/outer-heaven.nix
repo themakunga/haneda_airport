@@ -8,6 +8,7 @@
     ../../packages/social.nix
     ../../packages/terminal.nix
     ./common/base.nix
+    ../../modules/homebrew/outer-heaven.nix
   ];
 
   system = {

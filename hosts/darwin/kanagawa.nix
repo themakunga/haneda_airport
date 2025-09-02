@@ -8,7 +8,7 @@
     ../../packages/games.nix
     ../../packages/social.nix
     ../../packages/terminal.nix
-    ../../modules/homebrew/outer-heaven.nix
+    ../../modules/homebrew/kanagawa.nix
     ./common/base.nix
   ];
 }
