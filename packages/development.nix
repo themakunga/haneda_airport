@@ -1,8 +1,7 @@
-{inputs, pkgs, ...}: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     neovim
     go
-    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
     nodejs_24
     pnpm
     groovy
@@ -28,5 +27,6 @@
     cargo
     feedr
     opentofu
+    python313Packages.pyinstaller
   ];
 }

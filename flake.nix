@@ -16,7 +16,6 @@
     mac-app-util = {
       url = "github:hraban/mac-app-util";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, ...}@inputs:
@@ -37,7 +36,6 @@
       (final: prev: {
         myDevShell = self.packages.${prev.system}.dev-shell;
         feedr = self.packages.${prev.system}.feedr;
-        instagram-cli = self.packages.${prev.system}.instagram-cli;
       })
     ];
 
@@ -134,7 +132,6 @@
       in {
         dev-shell = pkgs.callPackage ./modules/dev-shell.nix {};
         feedr = pkgs.callPackage ./packages/feedr.nix {};
-        instagram-cli = pkgs.callPackage ./packages/instagram-cli.nix {};
       });
     devShells = forAllSystems (system: {
       default = self.packages.${system}.dev-shell;
@@ -144,10 +141,6 @@
       feedr = {
         type = "app";
         program = "${self.packages.${system}.feedr}/bin/feedr";
-      };
-      instagram-cli = {
-        type = "app";
-        program = "${self.packages.${system}.instagram-cli}/bin/instagram";
       };
     });
   };
