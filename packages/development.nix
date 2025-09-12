@@ -28,5 +28,6 @@
     feedr
     opentofu
     python313Packages.pyinstaller
+    posting
   ];
 }
