@@ -19,7 +19,6 @@
       "Magnet" = 441258766;
       "Parcel" = 639968404;
       "Amphetamine" = 937984704;
-      "BeFocusedPro" = 961632517;
       "Xcode" = 497799835;
     };
   };
