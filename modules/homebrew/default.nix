@@ -17,7 +17,6 @@
     ];
     masApps = {
       "Magnet" = 441258766;
-      "Parcel" = 639968404;
       "Amphetamine" = 937984704;
       "Xcode" = 497799835;
     };
