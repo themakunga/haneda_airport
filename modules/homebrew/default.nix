@@ -1,5 +1,6 @@
-{...}: {
+{config, ...}: {
   homebrew = {
+    taps = builtins.attrNames config.nix-homebrew.taps;
     enable = true;
     onActivation = {
       autoUpdate = true;
@@ -8,6 +9,7 @@
     };
     brews = [
       "mas"
+      "nchat"
     ];
     casks = [
       "typora"
