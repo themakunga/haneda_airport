@@ -11,5 +11,6 @@
     ssh-to-age
     fzf
     stow
+    glab
   ];
 }

@@ -16,9 +16,13 @@
     mac-app-util = {
       url = "github:hraban/mac-app-util";
     };
+    homebrew-nchat = {
+      url = "github:d99kris/nchat";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, ...}@inputs:
+  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, homebrew-nchat, mac-app-util, ...}@inputs:
 
   let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -62,6 +66,9 @@
                 enable = true;
                 autoMigrate = true;
                 user = user.name;
+                taps = {
+                  "d99kris/nchat" = homebrew-nchat;
+                };
             };
           }
           sops-nix.darwinModules.sops
