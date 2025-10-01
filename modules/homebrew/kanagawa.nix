@@ -16,6 +16,7 @@
       "1password-cli"
       "firefox"
       "mural"
+      "signal"
     ];
     masApps = {
 
