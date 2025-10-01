@@ -20,6 +20,9 @@
           "/Applications/zoom.us.app/"
         ];
       };
+      NSGlobalDomain = {
+        "com.apple.touchbar.lastControlStrip" = "AppControls";
+      };
     };
   };
 
