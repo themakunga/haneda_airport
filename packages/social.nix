@@ -6,6 +6,5 @@
     irssi
     reddit-tui
     neomutt
-    instagram-cli
   ];
 }
