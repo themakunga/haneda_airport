@@ -12,5 +12,7 @@
     fzf
     stow
     glab
+    elinks
+    qmk
   ];
 }
