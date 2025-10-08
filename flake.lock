@@ -93,11 +93,11 @@
     "homebrew-nchat": {
       "flake": false,
       "locked": {
-        "lastModified": 1758959117,
-        "narHash": "sha256-93XPEY0IaJ6cdIrMvfswAS4FMuNwrsewQ8kBhfyv570=",
+        "lastModified": 1759666134,
+        "narHash": "sha256-/fcr4pL24FO0I7jeNhN7UEdeBfqkbvGoXmGLXj2YQ4E=",
         "owner": "d99kris",
         "repo": "nchat",
-        "rev": "5122c92e16f0ed10210f480e58faf54a0e9ac73b",
+        "rev": "87786fc2a1df2f8a6c1e991af26a3b7c2a734f86",
         "type": "github"
       },
       "original": {
@@ -181,11 +181,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1759036355,
-        "narHash": "sha256-0m27AKv6ka+q270dw48KflE0LwQYrO7Fm4/2//KCVWg=",
+        "lastModified": 1759831965,
+        "narHash": "sha256-vgPm2xjOmKdZ0xKA6yLXPJpjOtQPHfaZDRtH+47XEBo=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e9f00bd893984bc8ce46c895c3bf7cac95331127",
+        "rev": "c9b6fb798541223bbb396d287d16f43520250518",
         "type": "github"
       },
       "original": {
@@ -212,11 +212,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1759188042,
-        "narHash": "sha256-f9QC2KKiNReZDG2yyKAtDZh0rSK2Xp1wkPzKbHeQVRU=",
+        "lastModified": 1759635238,
+        "narHash": "sha256-UvzKi02LMFP74csFfwLPAZ0mrE7k6EiYaKecplyX9Qk=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "9fcfabe085281dd793589bdc770a2e577a3caa5d",
+        "rev": "6e5a38e08a2c31ae687504196a230ae00ea95133",
         "type": "github"
       },
       "original": {
