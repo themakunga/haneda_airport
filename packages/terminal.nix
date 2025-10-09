@@ -12,5 +12,6 @@
     fzf
     stow
     glab
+    qmk
   ];
 }
