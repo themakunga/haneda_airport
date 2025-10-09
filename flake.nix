@@ -1,7 +1,9 @@
 {
   description = "Multi Host Nix and Nix-darwin config";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
     darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,9 +22,12 @@
       url = "github:d99kris/nchat";
       flake = false;
     };
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
   };
 
-  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, homebrew-nchat, mac-app-util, ...}@inputs:
+  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, homebrew-nchat, mac-app-util, flake-utils, ...}@inputs:
 
   let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -30,19 +35,30 @@
     forAllSystems  = nixpkgs.lib.genAttrs supportedSystems;
 
     common = import ./hosts/common.nix;
+
     userDefault = {
       enable = true;
       name = "nicolas";
       description = "Nicolas Martinez";
-
     };
+
     overlays = [
       (final: prev: {
         myDevShell = self.packages.${prev.system}.dev-shell;
         feedr = self.packages.${prev.system}.feedr;
 
+        dotnet-sdk = prev.dotnet-sdk_8;
+        dotnet-runtime = prev.dotnet-runtime_8;
+        aspnetcore-runtime = prev.aspnetcore-runtime_8;
       })
     ];
+
+    nixpkgsConfig = {
+      allowUnfree = true;
+      allowBroken = true;
+
+      dotnetCorePackages.usePrebuilt = true;
+    };
 
     mkNixosSystem = {system, host, user, hostname, extraModules ? []}:
       nixpkgs.lib.nixosSystem {
@@ -50,7 +66,12 @@
         modules = [
           (./hosts/linux + "/${host}.nix")
           sops-nix.nixosModules.sops
-          {nixpkgs.overlays = overlays;}
+          {
+            nixpkgs = {
+              overlays = overlays;
+              config = nixpkgsConfig;
+            };
+          }
           common
         ] ++ extraModules;
         specialArgs = {inherit inputs;};
@@ -75,8 +96,14 @@
           sops-nix.darwinModules.sops
           (./modules/homebrew + "/${host}.nix")
           mac-app-util.darwinModules.default
-          {nixpkgs.overlays = overlays;}
+          {
+            nixpkgs = {
+              overlays = overlays;
+              config = nixpkgsConfig;
+            };
+          }
           common
+          ("./optimization.nix")
         ] ++ extraModules;
           specialArgs = { inherit inputs;};
       };
@@ -136,14 +163,17 @@
         pkgs = import nixpkgs {
           inherit system;
           overlays = overlays;
+          config = nixpkgsConfig;
         };
       in {
         dev-shell = pkgs.callPackage ./modules/dev-shell.nix {};
         feedr = pkgs.callPackage ./packages/feedr.nix {};
+        dotnet-sdk = pkgs.dotnet-sdk;
 
       });
     devShells = forAllSystems (system: {
       default = self.packages.${system}.dev-shell;
+      dotnet = "./modules/dotnet-dev-shell.nix";
     });
 
     apps = forAllSystems (system: {

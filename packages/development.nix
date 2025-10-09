@@ -16,7 +16,7 @@
     lazysql
     gh
     google-cloud-sdk
-    awscli2
+    # awscli2
     pipx
     nil
     nixfmt-rfc-style
