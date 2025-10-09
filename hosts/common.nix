@@ -24,5 +24,6 @@
   imports = [
     ./shared/user.nix
     ./shared/hostname.nix
+    ./shared/cache.nix
   ];
 }

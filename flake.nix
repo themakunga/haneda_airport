@@ -1,7 +1,13 @@
 {
   description = "Multi Host Nix and Nix-darwin config";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +28,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, homebrew-nchat, mac-app-util, ...}@inputs:
+  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, homebrew-nchat, mac-app-util, nur, ...}@inputs:
 
   let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -37,10 +43,10 @@
 
     };
     overlays = [
+        nur.overlay
       (final: prev: {
         myDevShell = self.packages.${prev.system}.dev-shell;
         feedr = self.packages.${prev.system}.feedr;
-
       })
     ];
 
@@ -49,6 +55,7 @@
         inherit system;
         modules = [
           (./hosts/linux + "/${host}.nix")
+          nur.modules.nixosModules.nur
           sops-nix.nixosModules.sops
           {nixpkgs.overlays = overlays;}
           common
