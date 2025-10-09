@@ -2,14 +2,14 @@
   description = "Multi Host Nix and Nix-darwin config";
   inputs = {
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
+      url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
     };
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     darwin = {
-      url = "github:nix-darwin/nix-darwin/master";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
@@ -22,13 +22,9 @@
     mac-app-util = {
       url = "github:hraban/mac-app-util";
     };
-    homebrew-nchat = {
-      url = "github:d99kris/nchat";
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, homebrew-nchat, mac-app-util, nur, ...}@inputs:
+  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, nur, ...}@inputs:
 
   let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -43,7 +39,7 @@
 
     };
     overlays = [
-        nur.overlay
+        nur.overlays.default
       (final: prev: {
         myDevShell = self.packages.${prev.system}.dev-shell;
         feedr = self.packages.${prev.system}.feedr;
@@ -74,9 +70,6 @@
                 enable = true;
                 autoMigrate = true;
                 user = user.name;
-                taps = {
-                  "d99kris/nchat" = homebrew-nchat;
-                };
             };
           }
           sops-nix.darwinModules.sops

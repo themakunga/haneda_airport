@@ -9,8 +9,6 @@
     };
     brews = [
       "mas"
-      "nchat"
-      "qmk"
     ];
     casks = [
       "typora"

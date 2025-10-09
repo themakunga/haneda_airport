@@ -6,5 +6,6 @@
     irssi
     reddit-tui
     neomutt
+    nchat
   ];
 }
