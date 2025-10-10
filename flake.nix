@@ -4,10 +4,6 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, nur, ...}@inputs:
+  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, ...}@inputs:
 
   let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -41,7 +37,6 @@
 
     overlays = [
 
-        nur.overlays.default
       (final: prev: {
         myDevShell = self.packages.${prev.system}.dev-shell;
         dotnet-sdk_8 = prev.dotnet-sdk-bin;
@@ -56,7 +51,6 @@
         inherit system;
         modules = [
           (./hosts/linux + "/${host}.nix")
-          nur.modules.nixosModules.nur
           sops-nix.nixosModules.sops
           {nixpkgs.overlays = overlays;}
           common
