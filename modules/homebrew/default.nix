@@ -9,6 +9,7 @@
     };
     brews = [
       "mas"
+      "llvm" # WA- for #https://github.com/dotnet/runtime/issues/119706
     ];
     casks = [
       "typora"

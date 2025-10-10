@@ -2,14 +2,14 @@
   description = "Multi Host Nix and Nix-darwin config";
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
+      url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
@@ -22,9 +22,13 @@
     mac-app-util = {
       url = "github:hraban/mac-app-util";
     };
+    nchat = {
+      url = "github:d99kris/nchat";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, nur, ...}@inputs:
+  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, nur, nchat, ...}@inputs:
 
   let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -38,11 +42,16 @@
       description = "Nicolas Martinez";
 
     };
+
     overlays = [
+
         nur.overlays.default
       (final: prev: {
         myDevShell = self.packages.${prev.system}.dev-shell;
+        dotnet-sdk_8 = prev.dotnet-sdk-bin;
+        dotnet-runtime_8 = prev.dotnet-runtime-bin;
         feedr = self.packages.${prev.system}.feedr;
+        nchat = self.packages.${prev.system}.nchat; # Agregar nchat al overlay
       })
     ];
 
@@ -63,8 +72,10 @@
       darwin.lib.darwinSystem {
         inherit system;
         modules = [
+            nix-homebrew.darwinModules.nix-homebrew
+            {nixpkgs.overlays = overlays;}
+            common
           (./hosts/darwin + "/${host}.nix")
-          nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
                 enable = true;
@@ -72,11 +83,9 @@
                 user = user.name;
             };
           }
-          sops-nix.darwinModules.sops
           (./modules/homebrew + "/${host}.nix")
           mac-app-util.darwinModules.default
-          {nixpkgs.overlays = overlays;}
-          common
+            sops-nix.darwinModules.sops
         ] ++ extraModules;
           specialArgs = { inherit inputs;};
       };
@@ -140,6 +149,9 @@
       in {
         dev-shell = pkgs.callPackage ./modules/dev-shell.nix {};
         feedr = pkgs.callPackage ./packages/feedr.nix {};
+        nchat = pkgs.callPackage ./packages/nchat.nix {
+          src = inputs.nchat;
+        };
 
       });
     devShells = forAllSystems (system: {
@@ -150,6 +162,11 @@
       feedr = {
         type = "app";
         program = "${self.packages.${system}.feedr}/bin/feedr";
+      };
+
+      nchat = {
+        type = "app";
+        program = "${self.packages.${system}.nchat}/bin/nchat";
       };
 
 

@@ -8,7 +8,7 @@
     ruby
     vim
     lazygit
-    pre-commit
+    # pre-commit
     zulu23
     dbeaver-bin
     libpq
