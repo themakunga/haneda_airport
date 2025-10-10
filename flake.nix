@@ -42,7 +42,6 @@
         dotnet-sdk_8 = prev.dotnet-sdk-bin;
         dotnet-runtime_8 = prev.dotnet-runtime-bin;
         feedr = self.packages.${prev.system}.feedr;
-        nchat = self.packages.${prev.system}.nchat; # Agregar nchat al overlay
       })
     ];
 
@@ -139,7 +138,6 @@
       in {
         dev-shell = pkgs.callPackage ./modules/dev-shell.nix {};
         feedr = pkgs.callPackage ./packages/feedr.nix {};
-        nchat = pkgs.callPackage ./packages/nchat.nix {};
 
       });
     devShells = forAllSystems (system: {
@@ -151,12 +149,6 @@
         type = "app";
         program = "${self.packages.${system}.feedr}/bin/feedr";
       };
-
-      nchat = {
-        type = "app";
-        program = "${self.packages.${system}.nchat}/bin/nchat";
-      };
-
 
     });
   };
