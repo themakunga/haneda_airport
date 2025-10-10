@@ -22,13 +22,9 @@
     mac-app-util = {
       url = "github:hraban/mac-app-util";
     };
-    nchat = {
-      url = "github:d99kris/nchat";
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, nur, nchat, ...}@inputs:
+  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, nur, ...}@inputs:
 
   let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -149,9 +145,7 @@
       in {
         dev-shell = pkgs.callPackage ./modules/dev-shell.nix {};
         feedr = pkgs.callPackage ./packages/feedr.nix {};
-        nchat = pkgs.callPackage ./packages/nchat.nix {
-          src = inputs.nchat;
-        };
+        nchat = pkgs.callPackage ./packages/nchat.nix {};
 
       });
     devShells = forAllSystems (system: {
