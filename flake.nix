@@ -18,9 +18,13 @@
     mac-app-util = {
       url = "github:hraban/mac-app-util";
     };
+    homebrew-nchat = {
+      url = "github:d99kris/nchat";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, ...}@inputs:
+  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, homebrew-nchat, ...}@inputs:
 
   let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -61,20 +65,23 @@
       darwin.lib.darwinSystem {
         inherit system;
         modules = [
-            nix-homebrew.darwinModules.nix-homebrew
-            {nixpkgs.overlays = overlays;}
-            common
           (./hosts/darwin + "/${host}.nix")
           {
             nix-homebrew = {
                 enable = true;
                 autoMigrate = true;
                 user = user.name;
+                taps = {
+                  "d99kris/homebrew-nchat" = homebrew-nchat;
+                };
             };
           }
+            {nixpkgs.overlays = overlays;}
+            nix-homebrew.darwinModules.nix-homebrew
           (./modules/homebrew + "/${host}.nix")
           mac-app-util.darwinModules.default
             sops-nix.darwinModules.sops
+            common
         ] ++ extraModules;
           specialArgs = { inherit inputs;};
       };

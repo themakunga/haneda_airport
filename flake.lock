@@ -90,6 +90,22 @@
         "type": "indirect"
       }
     },
+    "homebrew-nchat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1760151723,
+        "narHash": "sha256-XQYoz8FJjKeOYWspTUNZimYzPP3osgqJXyeq4Xuecvg=",
+        "owner": "d99kris",
+        "repo": "nchat",
+        "rev": "109955a999a60673213592b4c4838242fc94d1c7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "d99kris",
+        "repo": "nchat",
+        "type": "github"
+      }
+    },
     "mac-app-util": {
       "inputs": {
         "cl-nix-lite": "cl-nix-lite",
@@ -182,6 +198,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "homebrew-nchat": "homebrew-nchat",
         "mac-app-util": "mac-app-util",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_3",

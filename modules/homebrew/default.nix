@@ -10,6 +10,7 @@
     brews = [
       "mas"
       "llvm" # WA- for #https://github.com/dotnet/runtime/issues/119706
+      "nchat"
     ];
     casks = [
       "typora"
@@ -17,6 +18,7 @@
       "firefox"
       "logitech-g-hub"
       "qmk-toolbox"
+      "via"
     ];
     masApps = {
       "Magnet" = 441258766;
