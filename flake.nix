@@ -39,7 +39,7 @@
       (final: prev: {
         myDevShell = self.packages.${prev.system}.dev-shell;
         feedr = self.packages.${prev.system}.feedr;
-
+        dott-tui = self.packages.${prev.system}.dott-tui;
       })
     ];
 
@@ -137,6 +137,7 @@
       in {
         dev-shell = pkgs.callPackage ./modules/dev-shell.nix {};
         feedr = pkgs.callPackage ./packages/feedr.nix {};
+        dott-tui = pkgs.callPackage ./packages/dott-tui.nix {};
 
       });
     devShells = forAllSystems (system: {
@@ -147,6 +148,11 @@
       feedr = {
         type = "app";
         program = "${self.packages.${system}.feedr}/bin/feedr";
+      };
+
+      dott-tui = {
+          type = "app";
+          program = "${self.packages.${system}.dott-tui}/bin/dott";
       };
 
 
