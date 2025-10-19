@@ -1,9 +1,7 @@
 {
   description = "Multi Host Nix and Nix-darwin config";
   inputs = {
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    };
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,13 +16,12 @@
     mac-app-util = {
       url = "github:hraban/mac-app-util";
     };
-    homebrew-nchat = {
-      url = "github:d99kris/nchat";
-      flake = false;
+    nvf = {
+      url = "github:notashelf/nvf";
     };
   };
 
-  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, homebrew-nchat, ...}@inputs:
+  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, nvf, ...}@inputs:
 
   let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -38,14 +35,11 @@
       description = "Nicolas Martinez";
 
     };
-
     overlays = [
-
       (final: prev: {
         myDevShell = self.packages.${prev.system}.dev-shell;
-        dotnet-sdk_8 = prev.dotnet-sdk-bin;
-        dotnet-runtime_8 = prev.dotnet-runtime-bin;
         feedr = self.packages.${prev.system}.feedr;
+
       })
     ];
 
@@ -66,22 +60,20 @@
         inherit system;
         modules = [
           (./hosts/darwin + "/${host}.nix")
+          nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
                 enable = true;
                 autoMigrate = true;
                 user = user.name;
-                taps = {
-                  "d99kris/homebrew-nchat" = homebrew-nchat;
-                };
             };
           }
-            {nixpkgs.overlays = overlays;}
-            nix-homebrew.darwinModules.nix-homebrew
+          sops-nix.darwinModules.sops
           (./modules/homebrew + "/${host}.nix")
           mac-app-util.darwinModules.default
-            sops-nix.darwinModules.sops
-            common
+          nvf.nixosModules.default
+          {nixpkgs.overlays = overlays;}
+          common
         ] ++ extraModules;
           specialArgs = { inherit inputs;};
       };
@@ -156,6 +148,7 @@
         type = "app";
         program = "${self.packages.${system}.feedr}/bin/feedr";
       };
+
 
     });
   };

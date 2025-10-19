@@ -77,6 +77,7 @@ in {
           AppleShowAllExtensions = true;
           InitialKeyRepeat = 14;
           KeyRepeat = 1;
+          _HIHideMenuBar = true;
         };
         screencapture = {
           disable-shadow = true;

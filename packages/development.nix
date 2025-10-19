@@ -8,7 +8,7 @@
     ruby
     vim
     lazygit
-    # pre-commit
+    pre-commit
     zulu23
     dbeaver-bin
     libpq
@@ -16,7 +16,7 @@
     lazysql
     gh
     google-cloud-sdk
-    # awscli2
+    awscli
     pipx
     nil
     nixfmt-rfc-style

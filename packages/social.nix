@@ -6,5 +6,7 @@
     irssi
     reddit-tui
     neomutt
+    nchat
+    caprine-bin
   ];
 }

@@ -7,14 +7,14 @@
 }:
 
 rustPlatform.buildRustPackage rec {
-  pname = "feedr";
-  version = "0.3.0";
+  pname = "dott";
+  version = "0.1.0";
 
   src = fetchFromGitHub {
-    owner = "bahdotsh";
+    owner = "commended";
     repo = pname;
     rev = "main";
-    hash = "sha256-FNY8mvKhMkiHCAdlOI38i+CfL1xHDfrc9WJakofOjbI=";
+    hash = "";
   };
   cargoLock = {
     lockFile = "${src}/Cargo.lock";
@@ -31,10 +31,11 @@ rustPlatform.buildRustPackage rec {
   OPENSSL_NO_VENDOR = 1;
 
   meta = with lib; {
-    description = "A fast and minimal RSS feed reader";
-    homepage = "https://github.com/bahdotsh/feedr";
+    description = "a beautiful and fast tui written in rust";
+    homepage = "https://github.com/commended/dott";
     license = with licenses; [mit];
     maintainers = with maintainers; [];
     platforms = platforms.all;
   };
 }
+
