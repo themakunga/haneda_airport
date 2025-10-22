@@ -8,5 +8,6 @@
     neomutt
     nchat
     caprine-bin
+    instagram-cli
   ];
 }

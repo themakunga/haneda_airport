@@ -40,6 +40,7 @@
         myDevShell = self.packages.${prev.system}.dev-shell;
         feedr = self.packages.${prev.system}.feedr;
         dott-tui = self.packages.${prev.system}.dott-tui;
+        instagram-cli = self.packages.${prev.system}.instagram-cli;
       })
     ];
 
@@ -138,6 +139,7 @@
         dev-shell = pkgs.callPackage ./modules/dev-shell.nix {};
         feedr = pkgs.callPackage ./packages/feedr.nix {};
         dott-tui = pkgs.callPackage ./packages/dott-tui.nix {};
+        instagram-cli = pkgs.callPackage ./packages/python-packages/instagram-cli.nix {};
 
       });
     devShells = forAllSystems (system: {
@@ -154,6 +156,11 @@
           type = "app";
           program = "${self.packages.${system}.dott-tui}/bin/dott";
       };
+
+      instagram-cli = {
+          type = "app";
+          program = "${self.packages.${system}.instagram-cli}/bin/instagram";
+        };
 
 
     });
