@@ -31,6 +31,10 @@ in {
       };
     };
 
+    environment.systemPackages = with pkgs; [
+      iterm2
+    ];
+
     programs = {
       zsh = {
         enable = true;

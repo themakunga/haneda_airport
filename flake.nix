@@ -2,6 +2,7 @@
   description = "Multi Host Nix and Nix-darwin config";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +22,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, darwin, sops-nix, nix-homebrew, mac-app-util, nvf, ...}@inputs:
+  outputs = { self, nixpkgs, neovim-nightly-overlay, darwin, sops-nix, nix-homebrew, mac-app-util, nvf, ...}@inputs:
 
   let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -159,7 +160,7 @@
 
       instagram-cli = {
           type = "app";
-          program = "${self.packages.${system}.instagram-cli}/bin/instagram";
+          program = "${self.packages.${system}.instagram-cli}/bin/instagram-cli";
         };
 
 

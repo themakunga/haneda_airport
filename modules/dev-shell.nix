@@ -1,4 +1,4 @@
-{pkgs, lib, sops ? null}:
+{inputs, pkgs, lib, sops ? null}:
   let
     privateRepoConfig =
       if sops != null then
@@ -36,9 +36,11 @@
         gh
         delta
         lazygit
-        neovim
+        # neovim
+        inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
         stow
         fzf
+        fd
         sops
         gnupg
         age

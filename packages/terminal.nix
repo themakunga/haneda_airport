@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     nmap
+    fd
     neofetch
     tmux
     oh-my-posh
@@ -13,5 +14,7 @@
     stow
     glab
     qmk
+    btop
+    dott-tui
   ];
 }

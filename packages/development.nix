@@ -1,6 +1,7 @@
-{pkgs, ...}: {
+{inputs, pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    neovim
+    # neovim
+    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
     go
     nodejs_24
     pnpm

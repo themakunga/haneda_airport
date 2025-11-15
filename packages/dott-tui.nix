@@ -14,7 +14,7 @@ rustPlatform.buildRustPackage rec {
     owner = "commended";
     repo = pname;
     rev = "main";
-    hash = "";
+    hash = "sha256-tPxX1vMnIFakcjZ4uoAHyxB0f4LVCtIe+AJ9s7zTGeg=";
   };
   cargoLock = {
     lockFile = "${src}/Cargo.lock";
